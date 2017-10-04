@@ -21,8 +21,7 @@ bool Number::match(Atom atom){
 bool Number::match(Variable& x){
   if(x.checkassign()){
     x.notassign();
-    //x.match(value());
-    x.match(*this);
+    x.match(value());
     return true;
   }else{
     return (value()==x.value());
