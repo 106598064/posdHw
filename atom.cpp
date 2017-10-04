@@ -24,7 +24,8 @@ bool Atom::match(Number num){
 bool Atom::match( Variable &x){
   if(x.checkassign()){
     x.notassign();
-    x.match(symbol());
+    //x.match(symbol());
+    x.match(*this);
     return true;
   }else{
     return (_symbol==x.value());
