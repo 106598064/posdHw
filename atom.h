@@ -14,7 +14,7 @@ public:
   string symbol();
   //bool operator ==(Atom a) {return _symbol == a._symbol;}
   bool match( Number num);
-  bool match( Atom atom);
+  bool match( Atom atom); //method way
   bool match( Variable &x);
 private:
   string _symbol;

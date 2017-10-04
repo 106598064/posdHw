@@ -11,7 +11,7 @@ string Variable::value(){
 }
 
 bool Variable::checkassign(){
-  return _assignable;
+  return _assignable; //確認指派
 }
 
 void Variable::notassign(){

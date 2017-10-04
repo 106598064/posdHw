@@ -12,7 +12,7 @@ class Variable{
 public:
   Variable(string s);
   string const _symbol;
-  string value();
+  string value(); //值
   /*bool match( Atom atom ){
     bool ret = _assignable;
     if(_assignable){
