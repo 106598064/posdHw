@@ -12,7 +12,7 @@ string Atom::symbol(){
 }
 
 bool Atom::match( Number& num){
-    return false;
+    return num.symbol() == _symbol;
 }
 
 bool Atom::match(Atom& atom){
@@ -22,7 +22,6 @@ bool Atom::match(Atom& atom){
     return false;
   }
 }
-
 
 
 bool Atom::match( Variable& x){
