@@ -21,24 +21,24 @@ void Variable::notassign(){
 
 bool Variable::match(string s){
   bool r = _assignable;
-    if(_assignable){
-      _value = s ;
-      notassign();
-    }else{
-      r = (_value == s);
-    }
-    return r;
+  if(_assignable){
+    _value = s ;
+    notassign();
+  }else{
+    r = (_value == s);
+  }
+  return r;
 }
 
 bool Variable::match( Number& num){
   bool r = _assignable;
-    if(_assignable){
-      _value = num.value() ;
-      notassign();
-    }else{
-      r = (_value == num.value());
-    }
-    return r;
+  if(_assignable){
+    _value = num.value() ;
+    notassign();
+  }else{
+    r = (_value == num.value());
+  }
+  return r;
 }
 
 bool Variable::match(Atom& atom){

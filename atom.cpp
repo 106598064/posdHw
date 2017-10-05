@@ -11,8 +11,12 @@ string Atom::symbol(){
   return _symbol;
 }
 
-bool Atom::match(Number& num){
-  if (num.symbol()==_symbol){
+bool Atom::match( Number& num){
+    return false;
+}
+
+bool Atom::match(Atom& atom){
+  if (atom.symbol()==_symbol){
     return true;
   }else{
     return false;
