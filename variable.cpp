@@ -1,8 +1,9 @@
 #include "variable.h"
 #include <string>
+
 using namespace std;
 
-Variable::Variable(string s):_value(s){
+Variable::Variable(string s):_symbol(s){
 
 }
 
@@ -21,12 +22,15 @@ void Variable::notassign(){
 
 bool Variable::match(string s){
   bool r = _assignable;
+
   if(_assignable){
     _value = s ;
     notassign();
+
   }else{
     r = (_value == s);
   }
+
   return r;
 }
 

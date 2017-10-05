@@ -26,10 +26,11 @@ bool Atom::match(Atom& atom){
 
 bool Atom::match( Variable& x){
   if(x.checkassign()){
+
+    x.match(_symbol);
     x.notassign();
-    x.match(symbol());
     return true;
   }else{
-    return (_symbol==x.value());
+    return _symbol==x.value();
   }
 }

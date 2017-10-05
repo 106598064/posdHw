@@ -59,6 +59,8 @@ TEST (Atom, matchSuccessToVar) {
   Variable x("X");
   Atom tom("tom");
   EXPECT_TRUE(tom.match(x));
+  EXPECT_EQ("tom",x.value());
+
 }
 
 // ?- X=tom, tom=X.

@@ -20,9 +20,9 @@ bool Number::match(Atom& atom){
 }
 
 bool Number::match(Variable& x){
-  if(x.checkassign()){
-    x.notassign();
+  if(x.checkassign()){  
     x.match(value());
+    x.notassign();
     return true;
   }else{
     return (value()==x.value());
