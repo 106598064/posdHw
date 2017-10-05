@@ -1,5 +1,5 @@
 #include "atom.h"
-
+#include "number.h"
 #include <string>
 using namespace std;
 
@@ -11,7 +11,7 @@ string Atom::symbol(){
   return _symbol;
 }
 
-bool Atom::match(Number num){
+bool Atom::match(Number& num){
   if (num.symbol()==_symbol){
     return true;
   }else{
@@ -21,7 +21,7 @@ bool Atom::match(Number num){
 
 
 
-bool Atom::match( Variable &x){
+bool Atom::match( Variable& x){
   if(x.checkassign()){
     x.notassign();
     x.match(symbol());

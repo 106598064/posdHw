@@ -1,6 +1,6 @@
 #ifndef ATOM_H
 #define ATOM_H
-#include "number.h"
+//#include "number.h"
 #include "variable.h"
 #include <string>
 
@@ -13,9 +13,9 @@ public:
   Atom (string s);
   string symbol();
   //bool operator ==(Atom a) {return _symbol == a._symbol;}
-  bool match( Number num);
-  bool match( Atom atom); //method way
-  bool match( Variable &x);
+  bool match( Number& num);
+  bool match( Atom& atom); //method way
+  bool match( Variable& x);
 private:
   string _symbol;
 };

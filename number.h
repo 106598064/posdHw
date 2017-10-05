@@ -1,6 +1,6 @@
 #ifndef NUMBER_H
 #define NUMBER_H
-#include "atom.h"
+
 #include "variable.h"
 #include <string>
 
@@ -14,11 +14,11 @@ public:
   string symbol();
   string value();
 
-  bool match(Atom atom);
+  bool match(Atom& atom);
 
-  bool match( Variable& X );
+  bool match(Variable& x );
 
-  bool match( Number num );
+  bool match( Number& num );
 
 private:
   int _value;

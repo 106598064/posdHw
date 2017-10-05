@@ -21,8 +21,9 @@ public:
     }
     return ret;
   }*/
-  bool match( Number num);
-  bool match( Atom atom);
+  bool match( string s);
+  bool match( Number& num);
+  bool match( Atom& atom);
   bool checkassign();
   void notassign();
 private:

@@ -19,8 +19,18 @@ void Variable::notassign(){
 
 }
 
+bool Variable::match(string s){
+  bool r = _assignable;
+    if(_assignable){
+      _value = s ;
+      notassign();
+    }else{
+      r = (_value == s);
+    }
+    return r;
+}
 
-bool Variable::match( Number num){
+bool Variable::match( Number& num){
   bool r = _assignable;
     if(_assignable){
       _value = num.value() ;
@@ -31,7 +41,7 @@ bool Variable::match( Number num){
     return r;
 }
 
-bool Variable::match(Atom atom){
+bool Variable::match(Atom& atom){
   bool r = _assignable;
   if(_assignable){
     _value = atom.symbol();

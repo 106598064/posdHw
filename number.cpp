@@ -1,4 +1,5 @@
 #include "number.h"
+//#include "atom.h"
 #include<string>
 using namespace std;
 
@@ -14,7 +15,7 @@ string Number::value(){
   return to_string(_value);
 }
 
-bool Number::match(Atom atom){
+bool Number::match(Atom& atom){
   return false;
 }
 
@@ -28,7 +29,7 @@ bool Number::match(Variable& x){
   }
 }
 
-bool Number::match(Number num){
+bool Number::match(Number& num){
   if(_value==num._value){
     return true;
   }else{
