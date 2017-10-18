@@ -86,7 +86,7 @@ TEST (Variable, num1_to_varY_and_varX_match_varY) {
 // ?- X=Y, Y=Z, Z=1
 // X=1, Y=1, Z=1
 TEST (Variable, num1_to_varZ_to_varY_to_varX) {
-  /*Variable x("X");
+  Variable x("X");
   Variable y("Y");
   Variable z("Z");
   Number n(1);
@@ -95,13 +95,13 @@ TEST (Variable, num1_to_varZ_to_varY_to_varX) {
   z.match(n);
   EXPECT_EQ("1",x.value());
   EXPECT_EQ("1",y.value());
-  EXPECT_EQ("1",z.value());*/
+  EXPECT_EQ("1",z.value());
 }
 
 // ?- X=Y, X=Z, Z=1
 // X=1, Y=1, Z=1
 TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
-  /*Variable x("X");
+  Variable x("X");
   Variable y("Y");
   Variable z("Z");
   Number n(1);
@@ -110,7 +110,7 @@ TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
   z.match(n);
   EXPECT_EQ("1",x.value());
   EXPECT_EQ("1",y.value());
-  EXPECT_EQ("1",z.value());*/
+  EXPECT_EQ("1",z.value());
 }
 
 // Give there is a Struct s contains Variable X
@@ -119,7 +119,13 @@ TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(X)"
 TEST (Variable, Struct1) {
-
+  Variable x("X");
+  Variable y("Y");
+  vector<Term *> v={&x};
+  Struct st(Atom("s"),v);
+  y.match(st);
+  ASSERT_EQ("Y", y.symbol());
+  ASSERT_EQ("s(X)", y.value());
 }
 
 // Give there is a Struct s contains Variable X
@@ -129,7 +135,15 @@ TEST (Variable, Struct1) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(teddy)"
 TEST (Variable, Struct2) {
-
+  Variable x("X");
+  Variable y("Y");
+  Atom teddy("teddy");
+  vector<Term *> v={&x};
+  Struct st(Atom("s"),v);
+  x.match(teddy);
+  y.match(st);
+  ASSERT_EQ("Y", y.symbol());
+  ASSERT_EQ("s(teddy)", y.value());
 }
 
 #endif

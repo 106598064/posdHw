@@ -5,6 +5,7 @@
 #include <vector>
 #include "atom.h"
 #include "number.h"
+#include "struct.h"
 using namespace std;
 
 class Number;
@@ -26,10 +27,14 @@ public:
   bool match(Atom& atom);
   bool match(Number& num);
   bool match(Variable& x);
-  //bool match(Term &term);
+  bool match(Struct &s);
   bool checkassign();
   void notassign();
   void change(string s);
+  void struct_change();
+  bool matched=false;
+  bool struct_matched=false;
+  string variable_match_struct = "";
 private:
   string _value;
   bool _assignable = true;

@@ -51,9 +51,11 @@ public:
     }
     return false;
   }
-private:
   Atom _name;
   std::vector<Term *> _args;
+private:
+  /*Atom _name;
+  std::vector<Term *> _args;*/
 };
 
 #endif
