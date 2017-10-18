@@ -14,11 +14,11 @@ public:
   string symbol();
   string value();
 
-  /*bool match(Atom& atom);
+  bool match(Atom& atom);
 
   bool match(Variable& x );
 
-  bool match( Number& num );*/
+  bool match( Number& num );
 
 private:
   double _value;

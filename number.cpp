@@ -22,18 +22,18 @@ string Number::value(){
   return str;
 }
 
-/*bool Number::match(Atom& atom){
+bool Number::match(Atom& atom){
   return false;
 }
 
 bool Number::match(Variable& x){
-  if(x.checkassign()){
+  /*if(x.checkassign()){
     x.match(value());
     x.notassign();
     return true;
   }else{
     return (value()==x.value());
-  }
+  }*/
 }
 
 bool Number::match(Number& num){
@@ -42,4 +42,4 @@ bool Number::match(Number& num){
   }else{
     return false;
   }
-}*/
+}
