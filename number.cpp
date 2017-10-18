@@ -1,9 +1,11 @@
 #include "number.h"
 //#include "atom.h"
+#include "iostream"
 #include<string>
+#include<sstream>
 using namespace std;
 
-Number::Number(int v):_value(v),_symbol(to_string(v)){
+Number::Number(double v):_value(v),_symbol(to_string(v)){
 
 }
 
@@ -12,15 +14,20 @@ string Number::symbol(){
 }
 
 string Number::value(){
-  return to_string(_value);
+  //return to_string(_value);
+  ostringstream strs;
+  strs << _value;
+  string str = strs.str();
+  //cout<<str<<endl;
+  return str;
 }
 
-bool Number::match(Atom& atom){
+/*bool Number::match(Atom& atom){
   return false;
 }
 
 bool Number::match(Variable& x){
-  if(x.checkassign()){  
+  if(x.checkassign()){
     x.match(value());
     x.notassign();
     return true;
@@ -35,4 +42,4 @@ bool Number::match(Number& num){
   }else{
     return false;
   }
-}
+}*/

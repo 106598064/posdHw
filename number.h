@@ -10,7 +10,7 @@ class Variable;
 class Atom;
 class Number{
 public:
-  Number(int v);
+  Number(double v);
   string symbol();
   string value();
 
@@ -21,7 +21,7 @@ public:
   bool match( Number& num );
 
 private:
-  int _value;
+  double _value;
   string _symbol;
   bool _assignable = true;
 

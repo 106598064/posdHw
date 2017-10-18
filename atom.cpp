@@ -1,17 +1,17 @@
 #include "atom.h"
-#include "number.h"
+//#include "number.h"
 #include <string>
 using namespace std;
 
-Atom::Atom(string s):_symbol(s){
+/*Atom::Atom(string s):_symbol(s){
 
 }
 
-string Atom::symbol(){
+string Atom::symbol() {
   return _symbol;
-}
+}*/
 
-bool Atom::match( Number& num){
+/*bool Atom::match( Number& num){
     return num.symbol() == _symbol;
 }
 
@@ -33,4 +33,4 @@ bool Atom::match( Variable& x){
   }else{
     return _symbol==x.value();
   }
-}
+}*/
