@@ -87,13 +87,22 @@ bool Variable::match(Atom& atom){
 
 bool Variable::match(Variable& x){
   bool result=_assignable;
-
+  _memory.push_back(&x._value);
+  x._memory.push_back(&_value);
+  if(&x._value!=&_value){
+    for(int i=0;i<_memory.size();i++){
+      x._memory.push_back(_memory[i]);
+    }
+    for(int i=0;i<x._memory.size();i++){
+      _memory.push_back(x._memory[i]);
+    }
+  }
   if(_assignable&&x._assignable){
     /*string *tmp=x._value;
     cout<<tmp<<endl;*/
     result=true;
 
-    _memory.push_back(&x._value);
+    /*_memory.push_back(&x._value);
     x._memory.push_back(&_value);
     if(&x._value!=&_value){
       for(int i=0;i<_memory.size();i++){
@@ -102,7 +111,7 @@ bool Variable::match(Variable& x){
       for(int i=0;i<x._memory.size();i++){
         _memory.push_back(x._memory[i]);
       }
-    }
+    }*/
 
     x._value=_value;
     matched=true;
@@ -112,24 +121,14 @@ bool Variable::match(Variable& x){
 
   }else if(_assignable&&!x._assignable){
 
-    /*result=true;
-    _value=x._value;
-    change(x._value);
-    notassign();*/
-    //_memory.push_back(&x._value);
+    result=true;
+
     notassign();
     change(x._value);
 
   }else if(!_assignable&&x._assignable){
     result=true;
-    /*x._value=_value;
-    change(x._value);*/
-    /*for(int i=0 ; i<_memory.size() ; i++){
-      *x._memory.push_back(*_memory[i]);
-    }*/
 
-    /*_memory.push_back(&x._value);
-    x._memory.push_back(&_value);*/
     x.notassign();
     for(int i=0 ; i<x._memory.size() ; i++){
       *x._memory[i] = _value;
