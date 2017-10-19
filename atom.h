@@ -2,8 +2,7 @@
 #define ATOM_H
 
 #include <string>
-
-using namespace std;;
+using namespace std;
 
 
 class Term{
@@ -19,7 +18,8 @@ public:
     return symbol() == term.symbol();
   }
 
-
+  string _type;
+  //string  *_value;
 };
 
 class Atom : public Term{
@@ -29,6 +29,16 @@ public:
   string symbol() const{
     return _symbol;
   }
+
+  bool match(Term & term){
+    if(term._type=="var")
+    {
+      //*(term._value)=symbol();
+      return true;
+    }
+    else Term::match(term);
+  }
+
 
   string _symbol;
 };

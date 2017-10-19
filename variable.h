@@ -12,7 +12,7 @@ class Number;
 
 class Variable:public Term{
 public:
-  Variable(string s):_symbol(s),_value(s){}
+  Variable(string s):_symbol(s),_value(s){_type="var";}
   string const _symbol;
   string symbol() const;
 

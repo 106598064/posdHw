@@ -147,4 +147,6 @@ TEST (Variable, Struct2) {
   ASSERT_EQ("s(teddy)", y.value());
 }
 
+
+
 #endif
