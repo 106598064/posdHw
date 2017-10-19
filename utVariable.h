@@ -36,6 +36,7 @@ TEST(Variable , numE_to_varX){
   Variable x("X");
   x.match(n);
   EXPECT_EQ("2.7182",x.value());
+  //cout<<x.value()<<endl;
 }
 
 // ?- X=Y, X=1.

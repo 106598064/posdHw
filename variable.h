@@ -15,7 +15,11 @@ public:
   Variable(string s):_symbol(s),_value(s){}
   string const _symbol;
   string symbol() const;
-  string value() const;
+
+
+
+
+
   /*bool match( Atom atom ){
     bool ret = _assignable;
     if(_assignable){
@@ -24,10 +28,12 @@ public:
     }
     return ret;
   }*/
+  string value() const;
   bool match(Atom& atom);
   bool match(Number& num);
   bool match(Variable& x);
   bool match(Struct &s);
+  //bool match(Term& term);
   bool checkassign();
   void notassign();
   void change(string s);
@@ -35,6 +41,10 @@ public:
   bool matched=false;
   bool struct_matched=false;
   string variable_match_struct = "";
+  string *test()
+  {
+    return &_value;
+  }
 private:
   string _value;
   bool _assignable = true;

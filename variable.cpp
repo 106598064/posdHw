@@ -89,8 +89,7 @@ bool Variable::match(Variable& x){
   bool result=_assignable;
 
   if(_assignable&&x._assignable){
-    /*string *tmp=x._value;
-    cout<<tmp<<endl;*/
+
     result=true;
 
     _memory.push_back(&x._value);
@@ -107,8 +106,7 @@ bool Variable::match(Variable& x){
     x._value=_value;
     matched=true;
     x.matched=true;
-    /*notassign();
-    x.notassign();*/
+
 
   }else if(_assignable&&!x._assignable){
 
@@ -147,3 +145,7 @@ bool Variable::match(Struct& s){
   return true;
 
 }
+
+/*bool Variable::match(Term& term){
+
+}*/

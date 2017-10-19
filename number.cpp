@@ -34,6 +34,9 @@ bool Number::match(Variable& x){
   }else{
     return (value()==x.value());
   }*/
+  string *s=x.test();
+  *s=value();
+  return true;
 }
 
 bool Number::match(Number& num){
