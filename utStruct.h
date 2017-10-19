@@ -176,20 +176,3 @@ TEST(Struct, nested_struct_and_multiVariable)
   EXPECT_EQ("s1(s2(Y), X)",st1.symbol());
   EXPECT_EQ("s1(s2(kent_beck), kent_beck)",st1.value());
 }
-
-
-
-
-
-
-
-
-
-/*TEST(Struct, test)
-{
-  Variable x("X");
-  Variable y("Y");
-  Number n(5);
-  x.match(y);
-  cout<<y.value()<<"   "<<x.value();
-}/*
