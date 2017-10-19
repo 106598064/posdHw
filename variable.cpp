@@ -103,12 +103,12 @@ bool Variable::match(Variable& x){
       }
     }
 
-    //x._value=_value;
-    string temp;
+    _value=x._value;
+    /*string temp;
     temp=x._value;
     x._value=_value;
-    _value=temp;
-    
+    _value=temp;*/
+
     matched=true;
     x.matched=true;
 
