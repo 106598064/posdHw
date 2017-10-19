@@ -19,7 +19,7 @@ public:
   }
 
   string _type;
-  //string  *_value;
+  string  *_value;
 };
 
 class Atom : public Term{
@@ -33,7 +33,7 @@ public:
   bool match(Term & term){
     if(term._type=="var")
     {
-      //*(term._value)=symbol();
+      *(term._value)=symbol();
       return true;
     }
     else Term::match(term);
