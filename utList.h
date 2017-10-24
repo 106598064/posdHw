@@ -26,7 +26,7 @@ TEST(List, Numbers) {
   Number n2(8128);
   vector<Term *> args = {&n1, &n2};
   List l(args);
-  EXPECT_EQ("[496,8128]",l.symbol());
+  EXPECT_EQ(string("[496,8128]"),l.symbol());
 }
 
 // Given there are two atoms: "terence_tao", "alan_mathison_turing"
