@@ -15,7 +15,7 @@ public:
     }else{
       string s="[";
       for(int i=0;i<_elements.size()-1;i++){
-        s+=_elements[i]->symbol()+",";
+        s+=_elements[i]->symbol()+", ";
       }
       s+=_elements[_elements.size()-1]->symbol()+"]";
       return s;
