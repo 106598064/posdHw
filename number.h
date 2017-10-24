@@ -1,32 +1,20 @@
 #ifndef NUMBER_H
 #define NUMBER_H
 
-#include "variable.h"
-#include <string>
 
+#include <string>
+#include <sstream>
+#include "term.h"
 using namespace std;
 
-class Variable;
-class Atom;
-class Number{
+class Number : public Term{
 public:
-  Number(double v);
-  string symbol();
-  string value();
-
-  bool match(Atom& atom);
-
-  bool match(Variable& x );
-
-  bool match( Number& num );
-
-private:
-  double _value;
-  string _symbol;
-  bool _assignable = true;
-
+  Number(double a){
+    ostringstream strs;
+    strs << a;
+    _symbol = strs.str();
+  }
 };
-
 
 
 #endif

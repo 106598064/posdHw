@@ -1,36 +1,7 @@
 #include "atom.h"
-//#include "number.h"
 #include <string>
+#include <sstream>
+#include "term.h"
 using namespace std;
 
-/*Atom::Atom(string s):_symbol(s){
-
-}
-
-string Atom::symbol() {
-  return _symbol;
-}*/
-
-/*bool Atom::match( Number& num){
-    return num.symbol() == _symbol;
-}
-
-bool Atom::match(Atom& atom){
-  if (atom.symbol()==_symbol){
-    return true;
-  }else{
-    return false;
-  }
-}
-
-
-bool Atom::match( Variable& x){
-  if(x.checkassign()){
-
-    x.match(_symbol);
-    x.notassign();
-    return true;
-  }else{
-    return _symbol==x.value();
-  }
-}*/
+Atom::Atom(string s){_symbol = s; }

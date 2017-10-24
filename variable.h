@@ -2,53 +2,29 @@
 #define VARIABLE_H
 
 #include <string>
-#include <vector>
-#include "atom.h"
-#include "number.h"
-#include "struct.h"
+#include "term.h"
 using namespace std;
 
-class Number;
-
-class Variable:public Term{
+class Variable : public Term {
 public:
-  Variable(string s):_symbol(s),_value(s){_type="var";}
-  string const _symbol;
-  string symbol() const;
-
-
-
-
-
-  /*bool match( Atom atom ){
-    bool ret = _assignable;
-    if(_assignable){
-      _value = atom._symbol ;
-      _assignable = false;
+  Variable(string s):Term(s), _inst(0){}
+  string value() const {
+    if (_inst)
+      return _inst->value();
+    else
+      return Term::value();
+  }
+  bool match( Term & term ){
+    if (this == &term)
+      return true;
+    if(!_inst){
+      _inst = &term ;
+      return true;
     }
-    return ret;
-  }*/
-  string value() const;
-  bool match(Atom& atom);
-  bool match(Number& num);
-  bool match(Variable& x);
-  bool match(Struct &s);
-  //bool match(Term& term);
-  bool checkassign();
-  void notassign();
-  void change(string s);
-  void struct_change();
-  bool matched=false;
-  bool struct_matched=false;
-  string variable_match_struct = "";
-  string *test()
-  {
-    return &_value;
+    return _inst->match(term);
   }
 private:
-  string _value;
-  bool _assignable = true;
-  vector<string*> _memory={&_value};
+  Term * _inst;
 };
 
 #endif
