@@ -2,6 +2,7 @@
 #define TERM_H
 
 #include <string>
+#include <vector>
 #include <sstream>
 #include <typeinfo>
 //#include "atom.h"
@@ -20,6 +21,7 @@ public:
     else*/
       //return symbol() == a.symbol();
   //}
+  virtual vector<Term*> elements(){};
 protected:
   Term ();
   Term (string s);

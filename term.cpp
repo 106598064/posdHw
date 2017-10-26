@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include <typeinfo>
+#include "list.h"
+#include <iostream>
 
 using namespace std;
 
@@ -11,6 +13,11 @@ using namespace std;
 bool Term::match(Term & a){
   if (typeid(a) ==  typeid(Variable))
     return a.match(*this);
+  /*else if(typeid(a) ==  typeid(List)){
+    cout<<"sss"<<endl;
+    return false;
+    
+  }*/
   else
     return symbol() == a.symbol();
 }
