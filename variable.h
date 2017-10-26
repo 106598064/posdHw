@@ -2,6 +2,7 @@
 #define VARIABLE_H
 
 #include <string>
+#include <iostream>
 #include "term.h"
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
     }
     return _inst->match(term);
   }
+
 private:
   Term * _inst;
 };

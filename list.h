@@ -17,9 +17,9 @@ public:
     }else{
       string s="[";
       for(int i=0;i<_elements.size()-1;i++){
-        s+=_elements[i]->symbol()+", ";
+        s+=_elements[i]->value()+", ";
       }
-      s+=_elements[_elements.size()-1]->symbol()+"]";
+      s+=_elements[_elements.size()-1]->value()+"]";
       return s;
     }
     //return _symbol;
@@ -39,11 +39,12 @@ public:
           if(!_elements[i]->match(*term.elements()[i])){
             return false;
           }else{
-            _elements[i]=term.elements()[i];
+            //*_elements[i]=*term.elements()[i];
           }
         }
         return true;
       }
+      //return symbol() == term.symbol();
     }else{
       return symbol() == term.symbol();
     }
