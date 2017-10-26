@@ -38,6 +38,8 @@ public:
         for(int i=0;i<_elements.size();i++){
           if(!_elements[i]->match(*term.elements()[i])){
             return false;
+          }else{
+            _elements[i]=term.elements()[i];
           }
         }
         return true;

@@ -149,6 +149,7 @@ TEST(List, matchToVarToAtominListShouldSucceed) {
   vector<Term *> args2 = {&n1,&n2,&t};
   List L2(args2);
   EXPECT_TRUE(L1.match(L2));
+  //cout<<L1.value()<<endl;
 }
 
 // ?- Y = [496, X, terence_tao], X = alan_mathison_turing.
@@ -164,6 +165,7 @@ TEST(List, matchVarinListToAtomShouldSucceed) {
   Atom t2("alan_mathison_turing");
   EXPECT_TRUE(L.match(y));
   EXPECT_TRUE(x.match(t2));
+  cout<<L.value()<<endl;
 }
 
 // Example:
