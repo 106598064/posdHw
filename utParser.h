@@ -4,11 +4,11 @@
 #include "atom.h"
 #include "parser.h"
 #include "scanner.h"
-//#include "term.h"
+#include "term.h"
 #include "list.h"
 #include "variable.h"
 #include <iostream>
-//#include "number.h"
+#include "number.h"
 using namespace std;
 
 class ParserTest : public ::testing::Test {

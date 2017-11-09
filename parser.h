@@ -11,6 +11,7 @@ using namespace std;
 #include "struct.h"
 #include "iostream"
 #include "list.h"
+#include "number.h"
 
 class Parser{
 public:
