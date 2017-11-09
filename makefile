@@ -1,29 +1,20 @@
-all: hw4 utAtom utVariable
+all: hw5
 
-hw4:	mainList.o term.o atom.o
+hw5: mainParser.o atom.o term.o
 ifeq (${OS}, Windows_NT)
-		g++ -o hw4 mainList.o term.o atom.o -lgtest
+	g++ -o hw5 mainParser.o atom.o term.o -lgtest
 else
-		g++ -o hw4 mainList.o term.o atom.o -lgtest -lpthread
+	g++ -o hw5 mainParser.o atom.o term.o -lgtest -lpthread
 endif
-utAtom: mainAtom.o atom.o term.o
-	g++	-o	utAtom mainAtom.o	term.o atom.o -lgtest -lpthread
-utVariable: mainVariable.o atom.o term.o
-	g++	-o	utVariable mainVariable.o	term.o atom.o -lgtest -lpthread
 
-mainVariable.o: mainVariable.cpp utVariable.h variable.h term.h
-	g++ -std=gnu++11 -c mainVariable.cpp
-mainAtom.o: mainAtom.cpp utAtom.h
-	g++ -std=gnu++11 -c mainAtom.cpp
-mainList.o: mainList.cpp utList.h
-	g++ -std=gnu++11 -c mainList.cpp
-term.o: term.cpp term.h variable.h
-	g++ -std=gnu++11 -c term.cpp
-atom.o: atom.cpp atom.h term.h number.h
+mainParser.o: mainParser.cpp utParser.h
+	g++ -std=gnu++11 -c mainParser.cpp
+atom.o: atom.cpp atom.h
 	g++ -std=gnu++11 -c atom.cpp
-
+term.o: term.cpp term.h
+	g++ -std=gnu++11 -c term.cpp
 
 clean:
-	rm -f *.o *hw4
+	rm -f *.o hw5
 stat:
 	wc *.h *.cpp

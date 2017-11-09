@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "term.h"
+#include "atom.h"
 #include "variable.h"
 #include <iostream>
 #include <vector>
@@ -54,7 +54,7 @@ public:
   };
   List (): _elements(){}
 
-  List (vector<Term *>  & elements):_elements(elements){}
+  List (vector<Term *> &elements):_elements(elements){}
   Term * head() const{
     if(_elements.size()==0){
       throw string("Accessing head in an empty list");

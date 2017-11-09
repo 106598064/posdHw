@@ -2,9 +2,8 @@
 #define VARIABLE_H
 
 #include <string>
-#include <iostream>
-#include "term.h"
-using namespace std;
+#include "atom.h"
+using std::string;
 
 class Variable : public Term {
 public:
@@ -24,7 +23,6 @@ public:
     }
     return _inst->match(term);
   }
-
 private:
   Term * _inst;
 };
