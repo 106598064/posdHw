@@ -81,7 +81,7 @@ public:
         //_term.match(term);
         //cout<<"DD"<<endl;
         for(int i=0;i<_terms.size();i++){
-          if(_terms[i]->symbol()==term->symbol()){
+          if(_terms[i]->value()==term->value()){
             term->match(*_terms[i]);
           }
           Struct * st = dynamic_cast<Struct*>(_terms[i]);
@@ -94,7 +94,6 @@ public:
       //_currentToken = _scanner.nextToken();
       while((_currentToken = _scanner.nextToken()) == ','||  _currentToken=='='||_currentToken == ';') {
         if(_currentToken == '='){
-          //commaflag=false;
           Node * l=new Node(TERM,_terms.back(),nullptr,nullptr);
           _terms.push_back(createTerm());
           Node * r=new Node(TERM,_terms.back(),nullptr,nullptr);
@@ -107,9 +106,8 @@ public:
           matchings();
           Node * root=new Node(COMMA,nullptr,l,_CurrentTreeRoot);
           _CurrentTreeRoot=root;
-
         }else{
-          //commaflag=false;
+          //cout<<"hhh"<<endl;
           Node * l=expressionTree();
           matchings();
           Node * root=new Node(SEMICOLON,nullptr,l,_CurrentTreeRoot);
@@ -125,7 +123,7 @@ public:
 
   void StructSearch(Struct *st,Term *term){
     for(int i=0;i<st->arity();i++){
-      if(st->args(i)->symbol()==term->symbol()){
+      if(st->args(i)->value()==term->value()){
         st->args(i)->match(*term);
       }
       Struct * st2 = dynamic_cast<Struct*>(st->args(i));

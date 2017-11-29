@@ -1,6 +1,7 @@
 #ifndef NODE_H
 #define NODE_H
 #include "term.h"
+#include "iostream"
 
 enum Operators {SEMICOLON, COMMA, EQUALITY, TERM};
 
@@ -11,11 +12,10 @@ public:
 
   bool evaluate(){
     if(payload==EQUALITY){
+      //cout<<"EE"<<endl;
       return (*left).term->match(*((*right).term));
-    }else if(payload==COMMA){
+    }else if(payload==COMMA||payload==SEMICOLON){
       return (*left).evaluate()&&(*right).evaluate();
-    }else if(payload==SEMICOLON){
-      return (*left).evaluate()||(*right).evaluate();
     }
   };
 

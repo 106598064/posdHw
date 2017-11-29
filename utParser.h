@@ -403,6 +403,7 @@ TEST_F(ParserTest, DisjTwoMatchingSuccess) {
 
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("2", terms[2]->value());
+  //cout<<terms[2]->symbol()<<","<<terms[2]->value()<<endl;
 }
 
 TEST_F(ParserTest, MatchingSuccess) {
