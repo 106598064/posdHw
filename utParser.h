@@ -366,7 +366,7 @@ TEST_F(ParserTest, ConjTwoMatchingFailure) {
   EXPECT_EQ("1", terms[1]->symbol());
   EXPECT_EQ("X", terms[2]->symbol());
   EXPECT_EQ("2", terms[3]->symbol());
-  
+
   Node * et = parser.expressionTree();
   EXPECT_EQ(COMMA, et->payload);
   EXPECT_EQ(EQUALITY, et->left->payload);
@@ -417,7 +417,7 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("2", terms[2]->value());
   EXPECT_EQ("s(s(2))", terms[4]->value());
-  cout<<terms[5]->symbol()<<endl;
+  //cout<<terms[5]->symbol()<<endl;
 }
 
 #endif

@@ -100,6 +100,10 @@ public:
           Node * r=new Node(TERM,_terms.back(),nullptr,nullptr);
           Node * root=new Node(EQUALITY,nullptr,l,r);
           _CurrentTreeRoot=root;
+          Struct * st = dynamic_cast<Struct*>(_terms[_terms.size()-1]);
+          if(_terms.size()>=6&&st){
+            StructSearch(st,_terms[_terms.size()-4]);
+          }
         }else if(_currentToken == ','){
           //cout<<"sss"<<endl;
           commaflag=true;
