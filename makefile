@@ -1,10 +1,10 @@
-all: hw5
+all: hw6
 
-hw5: mainParser.o atom.o term.o
+hw6: mainParser.o atom.o term.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw5 mainParser.o atom.o term.o -lgtest
+	g++ -o hw6 mainParser.o atom.o term.o -lgtest
 else
-	g++ -o hw5 mainParser.o atom.o term.o -lgtest -lpthread
+	g++ -o hw6 mainParser.o atom.o term.o -lgtest -lpthread
 endif
 
 mainParser.o: mainParser.cpp utParser.h
@@ -15,6 +15,6 @@ term.o: term.cpp term.h
 	g++ -std=gnu++11 -c term.cpp
 
 clean:
-	rm -f *.o hw5
+	rm -f *.o hw6
 stat:
 	wc *.h *.cpp
