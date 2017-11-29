@@ -79,8 +79,9 @@ public:
     if(term!=nullptr){
       if(commaflag){
         //_term.match(term);
-        //cout<<"DD"<<endl;
+        //cout<<_terms.size()<<endl;
         for(int i=0;i<_terms.size();i++){
+          //cout<<term->symbol()<<endl;
           if(_terms[i]->value()==term->value()){
             term->match(*_terms[i]);
           }
@@ -106,6 +107,7 @@ public:
           matchings();
           Node * root=new Node(COMMA,nullptr,l,_CurrentTreeRoot);
           _CurrentTreeRoot=root;
+
         }else{
           //cout<<"hhh"<<endl;
           Node * l=expressionTree();
@@ -122,8 +124,10 @@ public:
   }
 
   void StructSearch(Struct *st,Term *term){
+    //cout<<"ccc"<<endl;
     for(int i=0;i<st->arity();i++){
       if(st->args(i)->value()==term->value()){
+        //cout<<st->args(i)->value()<<endl;
         st->args(i)->match(*term);
       }
       Struct * st2 = dynamic_cast<Struct*>(st->args(i));

@@ -14,8 +14,12 @@ public:
     if(payload==EQUALITY){
       //cout<<"EE"<<endl;
       return (*left).term->match(*((*right).term));
-    }else if(payload==COMMA||payload==SEMICOLON){
+    }else if(payload==COMMA){
       return (*left).evaluate()&&(*right).evaluate();
+    }else if(payload==SEMICOLON){
+      bool tmp1=(*left).evaluate();
+      bool tmp2=(*right).evaluate();
+      return tmp1||tmp2;
     }
   };
 
