@@ -19,6 +19,10 @@ public:
     }
   };
 
+
+
+
+
   Operators payload;
   Term * term;
   Node * left;
