@@ -1,12 +1,11 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
-#include "term.h"
 #include "atom.h"
 #include <vector>
 #include <string>
 
-using namespace std;
+using std::string;
 
 class Struct: public Term {
 public:
@@ -22,34 +21,28 @@ public:
     return _name;
   }
   string symbol() const {
-    if(_args.size()>0){
-      string ret = _name.symbol() + "(";
-      std::vector<Term *>::const_iterator it = _args.begin();
-      for (; it != _args.end()-1; ++it)
-        ret += (*it)->symbol()+", ";
-      ret  += (*it)->symbol()+")";
-      return ret;
-    }else{
-      return _name.symbol()+"()";
-    }
-
+    if(_args.empty())
+    return  _name.symbol() + "()";
+    string ret = _name.symbol() + "(";
+    std::vector<Term *>::const_iterator it = _args.begin();
+    for (; it != _args.end()-1; ++it)
+      ret += (*it)->symbol()+", ";
+    ret  += (*it)->symbol()+")";
+    return ret;
   }
+
   string value() const {
-    if(_args.size()>0){
-      string ret = _name.symbol() + "(";
-      std::vector<Term *>::const_iterator it = _args.begin();
-      for (; it != _args.end()-1; ++it)
-        ret += (*it)->value()+", ";
-      ret  += (*it)->value()+")";
-      return ret;
-    }else{
-      return _name.symbol()+"()";
-    }
-
+    string ret = _name.symbol() + "(";
+    std::vector<Term *>::const_iterator it = _args.begin();
+    for (; it != _args.end()-1; ++it)
+      ret += (*it)->value()+", ";
+    ret  += (*it)->value()+")";
+    return ret;
   }
-  int arity() const{
-    return _args.size();
-  }
+  int arity() const {return _args.size();}
+  Iterator * createIterator();
+  Iterator* createDFSIterator();
+  Iterator* createBFSIterator();
 private:
   Atom _name;
   std::vector<Term *> _args;
