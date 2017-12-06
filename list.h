@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include "atom.h"
+#include "term.h"
 #include <vector>
 #include <string>
 #include <typeinfo>
@@ -24,9 +25,9 @@ public:
     return _elements[index];
   }
   int arity() const {return _elements.size();}
-  Iterator* createIterator();
-  Iterator* createDFSIterator();
-  Iterator* createBFSIterator();
+  Iterator<Term *> * createIterator();
+  Iterator<Term *> * createDFSIterator();
+  Iterator<Term *> * createBFSIterator();
 
 private:
   vector<Term *> _elements;

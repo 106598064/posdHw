@@ -1,95 +1,69 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include <string>
-using std::string;
+using namespace std;
 
+#include "term.h"
 #include "atom.h"
 #include "variable.h"
 #include "global.h"
 #include "scanner.h"
 #include "struct.h"
+#include "iostream"
 #include "list.h"
-
-#include "utParser.h"
+#include "number.h"
 
 class Parser{
 public:
-  Parser(Scanner scanner) : _scanner(scanner), _terms(){}
-
+  Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
     int token = _scanner.nextToken();
-    _currentToken = token;
+    _currentToken=token;
     if(token == VAR){
+      //cout<<"sss"<<endl;
       return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
       return new Number(_scanner.tokenValue());
-    }else if(token == ATOM || token == ATOMSC){
-      Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
-      if(_scanner.currentChar() == '(' ) {
-        return structure();
+    }else if(token == ATOM||token == ATOMSC){
+        Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
+        if(_scanner.currentChar() == '(' ) {
+          _scanner.nextToken() ;
+          vector<Term*> terms = getArgs();
+          if(_currentToken == ')')
+            return new Struct(*atom, terms);
+        }
+        else
+          return atom;
+    }else if(token == '['){
+      //cout<<"sss"<<endl;
+      vector<Term*> terms = getArgs();
+      if(_currentToken==']'){
+        return new List(terms);
+      }else if(_currentToken==')'){
+        throw string("unexpected token");
       }
-      else
-        return atom;
     }
-    else if(token == '['){
-      return list();
-    }
-
     return nullptr;
   }
 
-
-
-  Term * structure() {
-    Atom structName = Atom(symtable[_scanner.tokenValue()].first);
-    int startIndexOfStructArgs = _terms.size();
-    _scanner.nextToken();
-    createTerms();
-    if(_currentToken == ')')
-    {
-      vector<Term *> args(_terms.begin() + startIndexOfStructArgs, _terms.end());
-      _terms.erase(_terms.begin() + startIndexOfStructArgs, _terms.end());
-      return new Struct(structName, args);
-    } else {
-      throw string("unexpected token");
-    }
-  }
-
-  Term * list() {
-    int startIndexOfListArgs = _terms.size();
-    createTerms();
-    if(_currentToken == ']')
-    {
-      vector<Term *> args(_terms.begin() + startIndexOfListArgs, _terms.end());
-      _terms.erase(_terms.begin() + startIndexOfListArgs, _terms.end());
-      return new List(args);
-    } else {
-      throw string("unexpected token");
-    }
-  }
-
-  vector<Term *> & getTerms() {
-    return _terms;
-  }
-
-private:
-  FRIEND_TEST(ParserTest, createArgs);
-  FRIEND_TEST(ParserTest,ListOfTermsEmpty);
-  FRIEND_TEST(ParserTest,listofTermsTwoNumber);
-  FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
-
-  void createTerms() {
+  vector<Term*> getArgs()
+  {
     Term* term = createTerm();
-    if(term!=nullptr)
-    {
-      _terms.push_back(term);
+    vector<Term*> args;
+    if(term)
+      args.push_back(term);
+    if((_currentToken!=']' ||term!=nullptr) && (_currentToken!=')'||term!=nullptr)){
       while((_currentToken = _scanner.nextToken()) == ',') {
-        _terms.push_back(createTerm());
+        args.push_back(createTerm());
       }
     }
+
+    return args;
   }
 
-  vector<Term *> _terms;
+
+
+private:
   Scanner _scanner;
   int _currentToken;
 };
