@@ -1,12 +1,9 @@
 #include "term.h"
 #include "variable.h"
 #include "iterator.h"
-#include <string>
-#include <sstream>
 #include <typeinfo>
 #include "list.h"
-using std::string;
-using std::type_info;
+
 
 
 Iterator<Term*> * Term::createIterator()
