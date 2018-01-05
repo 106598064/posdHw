@@ -1,16 +1,9 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
-#include <stack>
-#include <iostream>
-#include <algorithm>
 #include "struct.h"
 #include "list.h"
-#include <queue>
 
-using namespace std;
-
-template <class T>
 class Iterator {
 public:
   virtual void first() = 0;
@@ -19,8 +12,7 @@ public:
   virtual bool isDone() const = 0;
 };
 
-template <class T>
-class NullIterator :public Iterator<T>{
+class NullIterator :public Iterator{
 public:
   NullIterator(Term *n){}
   void first(){}
@@ -34,8 +26,7 @@ public:
 
 };
 
-template <class T>
-class StructIterator :public Iterator<T> {
+class StructIterator :public Iterator {
 public:
   friend class Struct;
   void first() {
@@ -59,8 +50,7 @@ private:
   Struct* _s;
 };
 
-template <class T>
-class ListIterator :public Iterator<T> {
+class ListIterator :public Iterator {
 public:
   ListIterator(List *list): _index(0), _list(list) {}
 
@@ -82,120 +72,5 @@ public:
 private:
   int _index;
   List* _list;
-};
-
-template <class T>
-class DFSIterator : public Iterator<T>{
-public:
-  DFSIterator(Term* term):_term(term),_index(0){
-
-  }
-  //s(1, t(1,2), X)
-  /*
-        s(1, t(1,2), X)
-          /    |     \
-        /     |      \
-        1    t(1,2)    X
-              / \
-            /   \
-            1     2
-  DFS:
-  Stack: [X t(1,2) 1]
-  Stack: [X t(1,2)  ]    Output: 1
-  Stack: [X 2 1]         Output: 1, t(1,2)
-  Stack: [X 2]           Output: 1, t(1,2), 1
-  Stack: [X]             Output: 1, t(1,2), 1, 2
-  Stack: []              Output: 1, t(1,2), 1, 2, X
-
-  BFS:
-  Queue: [1 t(1,2) X]
-  Queue: [  t(1,2) X]    Output: 1
-  Queue: [X 1 2]         Output: 1, t(1,2)
-  Queue: [1 2]           Output: 1, t(1,2), X
-  Queue: [2]             Output: 1, t(1,2), X, 1
-  Queue: []              Output: 1, t(1,2), X, 1, 2
-  */
-   void first(){
-    _index = 0;
-    Term* term;
-    std::stack<Term*> stk;
-    std::vector<Term*> rev;
-    stk.push(_term);
-
-    while(!stk.empty()){
-      term = stk.top();
-      stk.pop();
-      if(_term!=term){
-        _dfsTerms.push_back(term);
-      }
-
-      Iterator<Term *> * it=term->createIterator();
-
-      rev.clear();
-      for(it->first();!it->isDone();it->next()){
-        rev.push_back(it->currentItem());
-      }
-      std::reverse(rev.begin(),rev.end());
-      for(int i=0;i<rev.size();i++){
-        stk.push(rev[i]);
-      }
-
-    }
-   }
-   void next(){
-    _index++;
-   }
-   Term* currentItem() const{
-    return _dfsTerms[_index];
-   }
-   bool isDone() const{
-    return _index >= _dfsTerms.size();
-   }
-  private:
-    std::vector<Term*> _dfsTerms;
-    T _term;
-    int _index;
-};
-
-template <class T>
-class BFSIterator : public Iterator<T> {
-public:
-  BFSIterator(Term* term):_term(term),_index(0){
-
-  }
-   void first(){
-     Term * term;
-     _index = 0;
-     queue<Term*> que;
-     que.push(_term);
-     while(!que.empty()) {
-      term = que.front();
-      que.pop();
-
-      if(_term!=term){
-        _bfsTerms.push_back(term);
-      }
-      Iterator<Term *> * it=term->createIterator();
-      for(it->first();!it->isDone();it->next()){
-        que.push(it->currentItem());
-      }
-     }
-   }
-   void next(){
-    _index++;
-   }
-   Term* currentItem() const{
-    return _bfsTerms[_index];
-   }
-   bool isDone() const{
-     return _index >= _bfsTerms.size();
-    }
-
-
-  private:
-    std::vector<Term*> _bfsTerms;
-    T _term;
-    int _index;
-
 };
 #endif

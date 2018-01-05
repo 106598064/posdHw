@@ -2,13 +2,12 @@
 #define SCANNER_H
 
 #include "global.h"
-#include <iostream>
+
 
 #include <string>
 #include <vector>
-/*using std::string;
-using std::vector;*/
-using namespace std;
+using std::string;
+using std::vector;
 
 class Scanner {
 public:
@@ -25,7 +24,7 @@ public:
         string s = extractAtom();
         processToken<ATOM>(s);
         return ATOM;
-      } else if (isSpecialCh(currentChar())) {
+      } else if (isSpecialCh(currentChar()) && position() < buffer.length() - 1) {
         string s = extractAtomSC();
         processToken<ATOMSC>(s);
         return ATOMSC;
@@ -33,8 +32,7 @@ public:
         string s = extractVar();
         processToken<VAR>(s);
         return VAR;
-      }else {
-        //cout<<"sss"<<endl;
+      } else {
         _tokenValue = NONE;
         return extractChar();
       }
@@ -62,7 +60,7 @@ public:
 
   string extractAtom() {
     int posBegin = position();
-    for (;isalnum(buffer[pos]); ++pos);
+    for (;isalnum(buffer[pos]) || buffer[pos] == '_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
 
@@ -77,7 +75,6 @@ public:
     for (;isalnum(buffer[pos]) || buffer[pos] == '_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
-
 
   char extractChar() {
     return buffer[pos++];

@@ -1,24 +1,38 @@
-all: hw7
+all: hw8 shell
 
-hw7: mainIterator.o atom.o term.o struct.o list.o
+hw8: expression.o atom.o struct.o list.o
+
 ifeq (${OS}, Windows_NT)
-	g++ -o hw7 mainIterator.o atom.o term.o struct.o list.o -lgtest
+	g++ -o hw8 expression.o atom.o list.o struct.o -lgtest
 else
-	g++ -o hw7 mainIterator.o atom.o term.o struct.o list.o -lgtest -lpthread
+	g++ -o hw8 expression.o atom.o list.o struct.o -lgtest -lpthread
 endif
 
-mainIterator.o: mainIterator.cpp utIterator.h
-	g++ -std=gnu++11 -c mainIterator.cpp
-atom.o: atom.cpp atom.h
-	g++ -std=gnu++11 -c atom.cpp
-term.o: term.cpp term.h
-	g++ -std=gnu++11 -c term.cpp
-struct.o:struct.cpp struct.h
-	g++ -std=gnu++11 -c struct.cpp
+shell: Shell.o atom.o struct.o list.o
+
+ifeq (${OS}, Windows_NT)
+	g++ -o shell Shell.o atom.o list.o struct.o -lgtest
+else
+	g++ -o shell Shell.o atom.o list.o struct.o -lgtest -lpthread
+endif
+
+atom.o: atom.cpp atom.h variable.h
+	g++ -std=gnu++0x -c atom.cpp
 list.o:list.cpp list.h
-	g++ -std=gnu++11 -c list.cpp
+		g++ -std=gnu++0x -c list.cpp
+struct.o:struct.cpp struct.h
+		g++ -std=gnu++0x -c struct.cpp
+
+
+expression.o: expression.cpp expression.h exception.h
+	g++ -std=gnu++0x -c expression.cpp
+
+Shell.o: Shell.cpp
+	g++ -std=gnu++0x -c Shell.cpp
+
 
 clean:
-	rm -f *.o hw7
+	rm -f *.o hw8
+
 stat:
 	wc *.h *.cpp
